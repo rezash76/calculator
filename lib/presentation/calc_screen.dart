@@ -5,6 +5,19 @@ class CalcScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return  Scaffold(
+      
+      body:Column(
+        children: [
+          Expanded(
+            child: Container(color: const Color.fromARGB(255, 28, 28, 38),)
+            ),
+          Expanded(
+            flex:2,
+            child: Container(color: const Color.fromARGB(255, 86, 84, 93)),
+            ),
+        ],
+      )
+    );
   }
 }
