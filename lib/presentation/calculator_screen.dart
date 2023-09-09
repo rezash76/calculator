@@ -1,20 +1,36 @@
-import 'package:calculator/presentation/bottons.dart';
+import 'package:calculator/presentation/button.dart';
+import 'package:calculator/presentation/button_type.dart';
 import 'package:flutter/material.dart';
 
 class CalcScreen extends StatelessWidget {
   CalcScreen({super.key});
 
-  final List<String> buttons = 
-  [
-    'AC','+/-', '%', '÷' ,
-    '7' , '8' , '9', 'x' ,
-    '4' , '5' , '6', '-' ,
-    '1' , '2' , '3', '+' ,
-    '0' , '.' , '=' ,
-  ]; 
+  final Map<String, ButtonType> buttons = {
+    'AC': ButtonType.other,
+    '+/-': ButtonType.other,
+    '%': ButtonType.other,
+    '÷': ButtonType.operation,
+    '7': ButtonType.number,
+    '8': ButtonType.number,
+    '9': ButtonType.number,
+    'x': ButtonType.operation,
+    '4': ButtonType.number,
+    '5': ButtonType.number,
+    '6': ButtonType.number,
+    '-': ButtonType.operation,
+    '1': ButtonType.number,
+    '2': ButtonType.number,
+    '3': ButtonType.number,
+    '+': ButtonType.operation,
+    '0': ButtonType.number,
+    '.': ButtonType.number,
+    '=': ButtonType.operation,
+  };
 
   @override
   Widget build(BuildContext context) {
+    var keys = buttons.keys.map((e) => e).toList();
+    var values = buttons.values.map((e) => e).toList();
     return Scaffold(
       body: Column(
         children: [
@@ -24,21 +40,19 @@ class CalcScreen extends StatelessWidget {
           )),
           Expanded(
             flex: 2,
-            child: Container(
-              child:  GridView.builder(
+            child: GridView.builder(
                 itemCount: buttons.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-                itemBuilder: (BuildContext context, int index){
-                  return MyBottons( 
-                    buttonText: buttons[index],
-                    color: Color.fromARGB(255, 83, 83, 92),
-                    textColor: Colors.white,
-                    );
-                  }),
-            ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4),
+                itemBuilder: (BuildContext context, int index) {
+                  return MyButton(
+                    buttonText: keys[index],
+                    type: values[index],
+                  );
+                }),
           ),
         ],
-      ), 
+      ),
     );
   }
 }
